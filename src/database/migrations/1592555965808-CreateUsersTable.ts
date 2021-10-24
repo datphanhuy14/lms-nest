@@ -23,6 +23,18 @@ export class CreateUsersTable1592555965808 implements MigrationInterface {
           type: 'varchar',
         },
         {
+          name: 'roleId',
+          type: 'int',
+        },
+        {
+          name: 'googleId',
+          type: 'int',
+        },
+        {
+          name: 'facebookId',
+          type: 'int',
+        },
+        {
           name: 'lastName',
           type: 'varchar',
         },

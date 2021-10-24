@@ -5,17 +5,8 @@ import { UserHttpModule } from '../users/user-http.module'
 
 @Global()
 @Module({
-  imports: [
-    UserHttpModule,
-  ],
-  providers: [
-    PasswordConfirmValidator,
-    UniqueEmailValidator,
-  ],
-  exports: [
-    PasswordConfirmValidator,
-    UniqueEmailValidator,
-  ],
+  imports: [UserHttpModule],
+  providers: [PasswordConfirmValidator, UniqueEmailValidator],
+  exports: [PasswordConfirmValidator, UniqueEmailValidator],
 })
-export class ValidatorModule {
-}
+export class ValidatorModule {}
