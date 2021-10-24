@@ -12,6 +12,8 @@ import { UserHttpModule } from './users/user-http.module'
 import { AuthModule } from './auth/auth.module'
 import { ValidatorModule } from '@validators/validator.module'
 import { DatabaseModule } from './database/database.module'
+import { RoleModule } from './roles/role.module';
+
 
 @Module({
   imports: [
@@ -28,6 +30,7 @@ import { DatabaseModule } from './database/database.module'
     AuthModule,
     ValidatorModule,
     DatabaseModule,
+    RoleModule,
   ],
   controllers: [],
   providers: [

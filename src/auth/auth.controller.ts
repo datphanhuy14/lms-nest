@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common'
 import { plainToClass } from 'class-transformer'
 import { User } from '../users/user.entity'
@@ -6,19 +8,19 @@ import { AuthService } from './auth.service'
 import { JwtAuthGuard } from './guards/jwt-auth.guard'
 import { UserService } from '../users/user.service'
 import { AuthUser } from '../decorators/auth.user.decorator'
-
+import helper from '../helpers/helper'
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly userService: UserService,
-  ) {
-  }
+  ) {}
 
   @UseGuards(LocalAuthGuard)
   @Post('/login')
-  login(@Request() request): Promise<{ accessToken: string }> {
-    return this.authService.generateJwtToken(request.user)
+  async login(@Request() request): Promise<{ accessToken: string }> {
+    const result = await this.authService.generateJwtToken(request.user)
+    return result
   }
 
   @UseGuards(JwtAuthGuard)

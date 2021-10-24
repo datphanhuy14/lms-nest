@@ -7,6 +7,7 @@ import { ValidationPipe } from '@nestjs/common'
 import { ValidationConfig } from '@config/validation.config'
 import { useContainer } from 'class-validator'
 import { ValidatorModule } from '@validators/validator.module'
+import { NestFactoryStatic } from '@nestjs/core/nest-factory';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)

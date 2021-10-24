@@ -1,4 +1,5 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
+import {v4} from 'uuid'
 
 export class CreateUsersTable1592555965808 implements MigrationInterface {
 
@@ -8,11 +9,11 @@ export class CreateUsersTable1592555965808 implements MigrationInterface {
       columns: [
         {
           name: 'id',
-          type: 'int',
+          type: 'varchar',
           isPrimary: true,
-          isGenerated: true,
-          generationStrategy: 'increment',
-        },
+          generationStrategy: 'uuid',
+          default: 'uuid_generate_v4()',
+        }, 
         {
           name: 'email',
           type: 'varchar',
@@ -25,14 +26,17 @@ export class CreateUsersTable1592555965808 implements MigrationInterface {
         {
           name: 'roleId',
           type: 'int',
+          
         },
         {
           name: 'googleId',
           type: 'int',
+          isNullable: true
         },
         {
           name: 'facebookId',
           type: 'int',
+          isNullable: true
         },
         {
           name: 'lastName',
@@ -44,18 +48,18 @@ export class CreateUsersTable1592555965808 implements MigrationInterface {
         },
         {
           name: 'isActive',
-          type: 'tinyInt',
+          type: 'int',
           default: 1,
         },
         {
           name: 'createdAt',
-          type: 'datetime',
+          type: 'timestamp',
           default: 'now()',
           isNullable: true,
         },
         {
           name: 'updatedAt',
-          type: 'datetime',
+          type: 'timestamp',
           default: 'now()',
           isNullable: true,
         },

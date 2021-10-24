@@ -19,22 +19,30 @@ import { plainToClass } from 'class-transformer'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { DeleteResult } from 'typeorm/index'
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
+import helper from '../helpers/helper'
 
 @UseInterceptors(ClassSerializerInterceptor)
-@Controller('users')
+@Controller('v1/users')
 @UseGuards(JwtAuthGuard)
 export class UserController {
-  constructor(private readonly userService: UserService) {
+  constructor(private readonly userService: UserService) {}
+
+  @Post()
+  async create(@Body() userData: CreateUserDto): Promise<User> {
+    const createdUser = await this.userService.store(userData)
+    return plainToClass(User, createdUser)
+  }
+
+ 
+  @Get('/inactive')
+  getInactiveUser(): Promise<User[]> {
+    return this.userService.getInactiveUsers()
   }
 
   @Get()
   index(): Promise<User[]> {
-    return this.userService.index()
-  }
-
-  @Get('/inactive')
-  getInactiveUser(): Promise<User[]> {
-    return this.userService.getInactiveUsers()
+    const result = this.userService.index()
+    return result
   }
 
   @Get('/:id')
@@ -47,15 +55,11 @@ export class UserController {
     return user
   }
 
-  @Post()
-  async create(@Body() userData: CreateUserDto): Promise<User> {
-    const createdUser = await this.userService.store(userData)
-
-    return plainToClass(User, createdUser)
-  }
-
   @Put('/:id')
-  update(@Param('id') id: EntityId, @Body() userData: UpdateUserDto): Promise<User> {
+  update(
+    @Param('id') id: EntityId,
+    @Body() userData: UpdateUserDto,
+  ): Promise<User> {
     return this.userService.update(id, userData)
   }
 

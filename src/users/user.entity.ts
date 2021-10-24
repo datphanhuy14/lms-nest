@@ -1,11 +1,20 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from 'typeorm'
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  Unique,
+  UpdateDateColumn,
+} from 'typeorm'
 import { Exclude, Expose } from 'class-transformer'
 
 @Entity({ name: 'users' })
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number
 
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+  
   @Unique(['email'])
   @Column()
   email: string
@@ -16,9 +25,18 @@ export class User extends BaseEntity {
   @Column()
   lastName: string
 
+  @Column({ nullable: true })
+  facebookId: number
+
+  @Column({ nullable: true })
+  googleId: number
+
   @Exclude()
   @Column()
   password: string
+
+  @Column()
+  roleId: number
 
   @Column({ default: true })
   isActive: boolean
