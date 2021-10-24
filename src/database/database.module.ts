@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { User } from '../users/user.entity'
+import { Role } from '../roles/role.entity'
+import { Subject } from '../subjects/subject.entity'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 
 @Module({
@@ -14,13 +16,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
         username: configService.get<string>('databaseUsername'),
         password: configService.get<string>('databasePassword'),
         database: configService.get<string>('databaseName'),
-        entities: [
-          User,
-        ],
+        entities: [User, Role, Subject],
       }),
-      inject: [ConfigService]
+      inject: [ConfigService],
     }),
-  ]
+  ],
 })
-export class DatabaseModule {
-}
+export class DatabaseModule {}

@@ -10,6 +10,10 @@ export class UserService extends BaseService<User, UserRepository> {
     super(repository, logger)
   }
 
+  index()   {
+    return this.repository.find({relations : ['role']})
+  }
+  
   findByEmail(email: string): Promise<User | null> {
     return this.repository.findOne({ email: email })
   }

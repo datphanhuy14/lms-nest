@@ -4,15 +4,8 @@ import { UserRepository } from './user.repository'
 import { UserSubscriber } from './subscriber/user.subscriber'
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([
-      UserRepository,
-    ]),
-  ],
+  imports: [TypeOrmModule.forFeature([UserRepository])],
   providers: [UserSubscriber],
-  exports: [
-    TypeOrmModule,
-  ],
+  exports: [TypeOrmModule],
 })
-export class UserModule {
-}
+export class UserModule {}

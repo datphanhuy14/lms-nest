@@ -3,11 +3,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
 } from 'typeorm'
 import { Exclude, Expose } from 'class-transformer'
+import {Role} from '../roles/role.entity'
 
 @Entity({ name: 'users' })
 export class User extends BaseEntity {
@@ -62,4 +64,6 @@ export class User extends BaseEntity {
   get fullName(): string {
     return `${this.firstName} ${this.lastName}`
   }
+  @ManyToOne(() => Role, role => role.user)
+    role: Role[];
 }

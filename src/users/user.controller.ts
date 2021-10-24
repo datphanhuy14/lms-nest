@@ -19,7 +19,6 @@ import { plainToClass } from 'class-transformer'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { DeleteResult } from 'typeorm/index'
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
-import helper from '../helpers/helper'
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('v1/users')

@@ -9,4 +9,9 @@ export class RoleService extends BaseService<Role, RoleRepository> {
   constructor(repository: RoleRepository, logger: LoggerService) {
     super(repository, logger)
   }
+
+  getInactiveRoles(): Promise<Role[]> {
+    return this.repository.getInactiveRoles()
+  }
+
 }

@@ -4,10 +4,11 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  Unique,
   UpdateDateColumn,
+  ManyToOne,
+  OneToMany,
 } from 'typeorm'
-import { Exclude, Expose } from 'class-transformer'
+import {User} from '../users/user.entity'
 
 @Entity({ name: 'roles' })
 export class Role extends BaseEntity {
@@ -15,7 +16,8 @@ export class Role extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: string;
   
-
+  @Column({ default: 'user' })
+  name: string
 
   @Column({ default: true })
   isActive: boolean
@@ -32,4 +34,11 @@ export class Role extends BaseEntity {
   })
   updatedAt: string
 
+  constructor(partial: Partial<Role>) {
+    super()
+    Object.assign(this, partial)
+  }
+
+  @OneToMany(() => User, user => user.role)
+    user: User[];
 }

@@ -1,11 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
-import { v4 } from 'uuid'
 
-export class CreateRolesTable1635072875957 implements MigrationInterface {
+export class CreateSubjectsTable1635099976862 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'roles',
+        name: 'subjects',
         columns: [
           {
             name: 'id',
@@ -15,9 +14,22 @@ export class CreateRolesTable1635072875957 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'name',
+            name: 'code',
             type: 'varchar',
           },
+          {
+            name: 'content',
+            type: 'varchar',
+          },
+          {
+            name: 'image',
+            type: 'varchar',
+          },
+          {
+            name: 'title',
+            type: 'varchar',
+          },
+
           {
             name: 'isActive',
             type: 'int',
@@ -41,6 +53,6 @@ export class CreateRolesTable1635072875957 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('roles')
+    await queryRunner.dropTable('subjects')
   }
 }
