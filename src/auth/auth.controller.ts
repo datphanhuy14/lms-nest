@@ -2,11 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common'
 import { plainToClass } from 'class-transformer'
-import { User } from '../users/user.entity'
+import { User } from '../services/users/user.entity'
 import { LocalAuthGuard } from './guards/local-auth.guard'
 import { AuthService } from './auth.service'
 import { JwtAuthGuard } from './guards/jwt-auth.guard'
-import { UserService } from '../users/user.service'
+import { UserService } from '../services/users/user.service'
 import { AuthUser } from '../decorators/auth.user.decorator'
 import helper from '../helpers/helper'
 @Controller('auth')

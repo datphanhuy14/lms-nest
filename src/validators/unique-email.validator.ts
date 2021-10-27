@@ -4,7 +4,7 @@ import {
   ValidatorConstraintInterface,
 } from 'class-validator'
 import { Injectable } from '@nestjs/common'
-import { UserService } from '../users/user.service'
+import { UserService } from '../services/users/user.service'
 
 @ValidatorConstraint({ name: 'isEmailUnique', async: true })
 @Injectable()

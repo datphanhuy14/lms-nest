@@ -8,7 +8,6 @@ import {
     ManyToOne,
     OneToMany,
   } from 'typeorm'
-//   import {User} from '../users/user.entity'
   
   @Entity({ name: 'subjects' })
   export class Subject extends BaseEntity {

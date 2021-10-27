@@ -1,8 +1,8 @@
 import { Role } from './role.entity'
 import { RoleRepository } from './role.repository'
 import { Injectable } from '@nestjs/common'
-import { BaseService } from '../base.service'
-import { LoggerService } from '../logger/custom.logger'
+import { BaseService } from '../../base.service'
+import { LoggerService } from '../../logger/custom.logger'
 
 @Injectable()
 export class RoleService extends BaseService<Role, RoleRepository> {

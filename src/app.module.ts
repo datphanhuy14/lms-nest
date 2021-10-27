@@ -8,12 +8,14 @@ import appConfig from '@config/app.config'
 import databaseConfig from '@config/database.config'
 import authConfig from '@config/auth.config'
 import { LoggerModule } from './logger/logger.module'
-import { UserHttpModule } from './users/user-http.module'
+import { UserHttpModule } from './services/users/user-http.module'
 import { AuthModule } from './auth/auth.module'
 import { ValidatorModule } from '@validators/validator.module'
 import { DatabaseModule } from './database/database.module'
-import { RoleHttpModule } from './roles/role-http.module';
-import { SubjectHttpModule } from './subjects/subject-http.module';
+import { RoleHttpModule } from './services/roles/role-http.module';
+import { SubjectHttpModule } from './services/subjects/subject-http.module';
+import { CourseModule } from './services/courses/course.module';
+import { LessonHttpModule } from './services/lessons/lesson-http.module';
 
 
 @Module({
@@ -33,6 +35,8 @@ import { SubjectHttpModule } from './subjects/subject-http.module';
     ValidatorModule,
     DatabaseModule,
     SubjectHttpModule,
+    CourseModule,
+    LessonHttpModule
   ],
   controllers: [],
   providers: [

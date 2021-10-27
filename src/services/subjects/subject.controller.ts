@@ -16,7 +16,7 @@ import { EntityId } from 'typeorm/repository/EntityId'
 import { SubjectService } from './subject.service'
 import { plainToClass } from 'class-transformer'
 import { DeleteResult } from 'typeorm/index'
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard'
 import { CreateSubjectDto } from './dto/create-subject.dto'
 import { UpdateSubjectDto } from './dto/update-subject.dto'
 
@@ -46,20 +46,20 @@ export class SubjectController {
 
   @Get('/:id')
   async show(@Param('id') id: EntityId): Promise<Subject> {
-    const role = await this.subjectService.findById(id)
-    if (!role) {
+    const subject = await this.subjectService.findById(id)
+    if (!subject) {
       throw new NotFoundException()
     }
 
-    return role
+    return subject
   }
 
   @Put('/:id')
   update(
     @Param('id') id: EntityId,
-    @Body() roleData: UpdateSubjectDto,
+    @Body() subjectData: UpdateSubjectDto,
   ): Promise<Subject> {
-    return this.subjectService.update(id, roleData)
+    return this.subjectService.update(id, subjectData)
   }
 
   @Delete('/:id')

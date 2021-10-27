@@ -1,7 +1,7 @@
 import { Global, Module } from '@nestjs/common'
 import { PasswordConfirmValidator } from './password-confirm.validator'
 import { UniqueEmailValidator } from './unique-email.validator'
-import { UserHttpModule } from '../users/user-http.module'
+import { UserHttpModule } from '../services/users/user-http.module'
 
 @Global()
 @Module({

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {
   Body,
   ClassSerializerInterceptor,
@@ -8,9 +9,11 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common'
+import { AuthUser } from '../../decorators/auth.user.decorator'
 import { User } from './user.entity'
 import { UserService } from './user.service'
 import { CreateUserDto } from './dto/create-user.dto'
@@ -18,7 +21,7 @@ import { EntityId } from 'typeorm/repository/EntityId'
 import { plainToClass } from 'class-transformer'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { DeleteResult } from 'typeorm/index'
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard'
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('v1/users')
@@ -32,15 +35,14 @@ export class UserController {
     return plainToClass(User, createdUser)
   }
 
- 
   @Get('/inactive')
   getInactiveUser(): Promise<User[]> {
     return this.userService.getInactiveUsers()
   }
 
   @Get()
-  index(): Promise<User[]> {
-    const result = this.userService.index()
+  index(@Query() options:any): Promise<User> {
+    const result = this.userService.list({relations : ['role']})
     return result
   }
 

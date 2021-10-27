@@ -1,17 +1,21 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/ban-types */
 import { User } from './user.entity'
 import { UserRepository } from './user.repository'
 import { Injectable } from '@nestjs/common'
-import { BaseService } from '../base.service'
-import { LoggerService } from '../logger/custom.logger'
+import { BaseService } from '../../base.service'
+import { LoggerService } from '../../logger/custom.logger'
 
 @Injectable()
 export class UserService extends BaseService<User, UserRepository> {
   constructor(repository: UserRepository, logger: LoggerService) {
     super(repository, logger)
   }
-
-  index()   {
-    return this.repository.find({relations : ['role']})
+  list(options: object): Promise<User> {
+    return this.repository.findOne(options)
+  }
+  index() {
+    return this.repository.find()
   }
   
   findByEmail(email: string): Promise<User | null> {

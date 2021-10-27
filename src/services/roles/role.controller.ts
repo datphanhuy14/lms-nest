@@ -16,7 +16,7 @@ import { EntityId } from 'typeorm/repository/EntityId'
 import { RoleService } from './role.service'
 import { plainToClass } from 'class-transformer'
 import { DeleteResult } from 'typeorm/index'
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard'
 import { CreateRoleDto } from './dto/create-role.dto'
 import { UpdateRoleDto } from './dto/update-role.dto'
 
