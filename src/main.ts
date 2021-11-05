@@ -7,7 +7,8 @@ import { ValidationPipe } from '@nestjs/common'
 import { ValidationConfig } from '@config/validation.config'
 import { useContainer } from 'class-validator'
 import { ValidatorModule } from '@validators/validator.module'
-import { NestFactoryStatic } from '@nestjs/core/nest-factory';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
@@ -16,6 +17,16 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ResponseTransformInterceptor())
   app.useGlobalPipes(new ValidationPipe(ValidationConfig))
   app.setGlobalPrefix(configService.get<string>('apiPrefix'))
+
+  const config = new DocumentBuilder()
+  .setTitle('LMS example')
+  .setDescription('The lms API description')
+  .setVersion('1.0')
+  .addTag('LMS', 'Day la description')
+  .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
 
   useContainer(app.select(ValidatorModule), { fallbackOnErrors: true })
 

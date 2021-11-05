@@ -12,10 +12,10 @@ import { UserHttpModule } from './services/users/user-http.module'
 import { AuthModule } from './auth/auth.module'
 import { ValidatorModule } from '@validators/validator.module'
 import { DatabaseModule } from './database/database.module'
-import { RoleHttpModule } from './services/roles/role-http.module';
-import { SubjectHttpModule } from './services/subjects/subject-http.module';
+import { RoleModule } from './services/roles/role.module';
+import { SubjectModule } from './services/subjects/subject.module';
 import { CourseModule } from './services/courses/course.module';
-import { LessonHttpModule } from './services/lessons/lesson-http.module';
+import { LessonModule } from './services/lessons/lesson.module';
 
 
 @Module({
@@ -30,13 +30,13 @@ import { LessonHttpModule } from './services/lessons/lesson-http.module';
     }),
     LoggerModule,
     UserHttpModule,
-    RoleHttpModule,
+    RoleModule,
     AuthModule,
     ValidatorModule,
     DatabaseModule,
-    SubjectHttpModule,
+    SubjectModule,
     CourseModule,
-    LessonHttpModule
+    LessonModule
   ],
   controllers: [],
   providers: [

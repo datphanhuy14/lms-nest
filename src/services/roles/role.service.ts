@@ -1,17 +1,12 @@
-import { Role } from './role.entity'
-import { RoleRepository } from './role.repository'
-import { Injectable } from '@nestjs/common'
-import { BaseService } from '../../base.service'
-import { LoggerService } from '../../logger/custom.logger'
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+
+import { Role } from './role.entity';
 
 @Injectable()
-export class RoleService extends BaseService<Role, RoleRepository> {
-  constructor(repository: RoleRepository, logger: LoggerService) {
-    super(repository, logger)
+export class RoleService extends TypeOrmCrudService<Role> {
+  constructor(@InjectRepository(Role) repo) {
+    super(repo);
   }
-
-  getInactiveRoles(): Promise<Role[]> {
-    return this.repository.getInactiveRoles()
-  }
-
 }

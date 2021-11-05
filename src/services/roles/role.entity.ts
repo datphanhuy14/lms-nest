@@ -5,7 +5,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  ManyToOne,
   OneToMany,
 } from 'typeorm'
 import {User} from '../users/user.entity'
@@ -17,7 +16,7 @@ export class Role extends BaseEntity {
   id: string;
   
   @Column({ default: 'user' })
-  name: string
+  permission: string
 
   @Column({ default: true })
   isActive: boolean

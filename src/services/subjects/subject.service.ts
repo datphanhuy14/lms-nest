@@ -1,17 +1,12 @@
-import { Injectable } from '@nestjs/common'
-import { BaseService } from '../../base.service'
-import { LoggerService } from '../../logger/custom.logger'
-import { Subject } from './subject.entity'
-import { SubjectRepository } from './subject.repository'
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 
+import { Subject } from './subject.entity';
 
 @Injectable()
-export class SubjectService extends BaseService<Subject, SubjectRepository> {
-  constructor(repository: SubjectRepository, logger: LoggerService) {
-    super(repository, logger)
-  }
-
-  getInactiveSubjects(): Promise<Subject[]> {
-    return this.repository.getInactiveSubjects()
+export class SubjectService extends TypeOrmCrudService<Subject> {
+  constructor(@InjectRepository(Subject) repo) {
+    super(repo);
   }
 }

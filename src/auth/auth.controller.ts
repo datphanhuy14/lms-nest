@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common'
+import { Controller, Get, Post, Request, UseGuards,Body } from '@nestjs/common'
 import { plainToClass } from 'class-transformer'
 import { User } from '../services/users/user.entity'
 import { LocalAuthGuard } from './guards/local-auth.guard'
@@ -19,6 +19,7 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('/login')
   async login(@Request() request): Promise<{ accessToken: string }> {
+    console.log(request.user)
     const result = await this.authService.generateJwtToken(request.user)
     return result
   }

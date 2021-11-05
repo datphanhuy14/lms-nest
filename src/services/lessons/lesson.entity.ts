@@ -14,7 +14,7 @@ import {
     id: string;
     
     @Column()
-    courseId: string
+    courseId: number
   
     @Column()
     content1: string
